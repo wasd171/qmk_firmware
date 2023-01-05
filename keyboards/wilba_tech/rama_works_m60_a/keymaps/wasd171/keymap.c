@@ -16,10 +16,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // Util layer
 [UTIL] = LAYOUT_60_hhkb(
-	KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,     KC_F10,  KC_F11,  KC_F12,  KC_INS,  KC_DEL,
-	KC_CAPS, G(KC_Q), G(KC_W), _______, _______, G(KC_T), _______, _______, _______, G(KC_O),   G(KC_P), KC_UP,   _______, _______,
-	_______, G(KC_A), G(KC_S), _______, G(KC_F), _______, _______, _______, _______, _______,   KC_LEFT, KC_RGHT, _______,
-	_______, G(KC_Z), G(KC_X), G(KC_C), G(KC_V), _______, G(KC_N), _______, _______, G(KC_DOT), KC_DOWN, _______, _______,
+	KC_ESC,  KC_BRID, KC_BRIU, _______, _______, BL_DEC,  BL_INC,  KC_MPRV, KC_MPLY,    KC_MNXT,   KC_MUTE, KC_VOLD, KC_VOLU,  LCTL(LCMD(KC_Q)),  KC_DEL,
+	KC_CAPS, G(KC_Q), G(KC_W), G(KC_E), G(KC_R), G(KC_T), G(KC_Y), G(KC_U), G(KC_I),    G(KC_O),   G(KC_P), KC_UP,   _______, _______,
+	_______, G(KC_A), G(KC_S), G(KC_D), G(KC_F), G(KC_G), G(KC_H), G(KC_J), G(KC_K),    G(KC_L),   KC_LEFT, KC_RGHT, _______,
+	_______, G(KC_Z), G(KC_X), G(KC_C), G(KC_V), G(KC_B), G(KC_N), G(KC_M), G(KC_COMM), G(KC_DOT), KC_DOWN, _______, _______,
 	         _______, _______,                            _______,                              _______, _______),
 
 };
