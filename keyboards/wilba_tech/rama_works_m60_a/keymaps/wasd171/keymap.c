@@ -1,10 +1,36 @@
 // M60-A layout
 #include QMK_KEYBOARD_H
 
-#define MAIN 		0
-#define MAIN_NORMAL 1
-#define UTIL 		2
-#define FUNC 		3
+enum layers {
+	MAIN,
+	MAIN_NORMAL,
+	UTIL,
+	FUNC
+};
+
+// See https://skip.house/blog/qmk-globe-key
+enum my_keycodes {
+ // Apple globe key
+ APPLE_GLOBE = SAFE_RANGE,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+  case APPLE_GLOBE:
+    host_consumer_send(record->event.pressed ? AC_NEXT_KEYBOARD_LAYOUT_SELECT : 0);
+    return false;
+  }
+
+  return true;
+};
+
+// See https://docs.qmk.fm/features/combo
+const uint16_t PROGMEM lshift_rshift[] = {SC_LSPO, SC_RSPC, COMBO_END};
+const uint16_t PROGMEM lshift_space_rshift[] = {SC_LSPO, KC_SPC, SC_RSPC, COMBO_END};
+combo_t key_combos[] = {
+    COMBO(lshift_rshift, DF(MAIN_NORMAL)),
+    COMBO(lshift_space_rshift, DF(MAIN)),
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -14,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,      KC_P,    KC_LBRC, KC_RBRC, KC_BSPC,
 	KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,      KC_SCLN, KC_QUOT, KC_ENT,
 	SC_LSPO, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,    KC_SLSH, SC_RSPC, MO(FUNC),
-	         KC_LGUI, KC_LALT,                            LT(UTIL, KC_SPC),                     KC_RALT, DF(MAIN_NORMAL)),
+	         KC_LGUI, KC_LALT,                            LT(UTIL, KC_SPC),              		KC_RALT, APPLE_GLOBE),
 
 // Main (normal) layer (normal Space key)
 [MAIN_NORMAL] = LAYOUT_60_hhkb(
@@ -22,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,      KC_P,    KC_LBRC, KC_RBRC, KC_BSPC,
 	KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,      KC_SCLN, KC_QUOT, KC_ENT,
 	SC_LSPO, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,    KC_SLSH, SC_RSPC, MO(FUNC),
-	         KC_LGUI, KC_LALT,                            KC_SPC,                     			KC_RALT, DF(MAIN)),
+	         KC_LGUI, KC_LALT,                            KC_SPC,                     			KC_RALT, APPLE_GLOBE),
 
 // Util layer
 [UTIL] = LAYOUT_60_hhkb(

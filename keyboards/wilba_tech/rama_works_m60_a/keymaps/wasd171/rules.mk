@@ -2,3 +2,5 @@
 SRC =	keyboards/wilba_tech/wt_main.c \
 		quantum/color.c \
 		drivers/led/issi/is31fl3731.c
+KEYBOARD_SHARED_EP = yes
+COMBO_ENABLE = yes
