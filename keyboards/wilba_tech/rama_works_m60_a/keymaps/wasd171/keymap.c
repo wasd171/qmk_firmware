@@ -1,6 +1,18 @@
 // M60-A layout
 #include QMK_KEYBOARD_H
 
+
+static uint32_t keepalive_timer = 0;
+static const uint32_t keepalive_interval_ms = 10000;
+
+void housekeeping_task_user(void) {
+	// USB keepalive (prevents macOS USB suspend)
+    if (timer_elapsed32(keepalive_timer) > keepalive_interval_ms) {
+        keepalive_timer = timer_read32();
+        send_keyboard_report();
+    }
+}
+
 enum layers {
 	MAIN,
 	MAIN_NORMAL,
